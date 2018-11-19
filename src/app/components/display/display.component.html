@@ -1,0 +1,24 @@
+<div class="container">
+  <h2>User Data</h2>
+  <table class="table table-bordered">
+    <thead >
+      <tr>
+        <th>User Email</th>
+        <th>Subscription</th>
+        <th>Password</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="userData.length; else default_message">
+      <tr *ngFor="let user of userData">
+        <td>{{user.user_email}}</td>
+        <td>{{user.subscription}}</td>
+        <td>{{user.password}}</td>
+      </tr>
+    </tbody>
+		<ng-template #default_message>
+		 <tbody>
+			<td colspan="3" style="text-align:center">Currently there are no record found.</td>
+	   </tbody>
+	  </ng-template>
+  </table>
+</div>

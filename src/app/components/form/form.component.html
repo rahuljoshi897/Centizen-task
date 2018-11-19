@@ -1,0 +1,46 @@
+<div class="container">
+<div class="alert alert-success in alert-dismissible" [innerHtml]="SuccessMessage" *ngIf="SuccessMessage"></div>
+<div class="alert alert-danger in alert-dismissible" [innerHtml]="ErrorMessage" *ngIf="ErrorMessage"></div>
+  <form [formGroup]="UserForm" (ngSubmit)="AddUserDetails(UserForm.value)">
+    <div class="row">
+      <div class="col-25">
+        <label for="fname">Email</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="user_email" name="user_email" placeholder="Enter your email" formControlName="user_email">
+		<div class="min-height-div">
+			<span *ngIf="!UserForm.controls['user_email'].valid && UserForm.controls['user_email'].touched">Please Enter valid Email.</span>
+		</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Subscriptions Type</label>
+      </div>
+      <div class="col-75">
+        <select class="select_vendor" formControlName="subscription">
+			<option *ngFor="let objSub of subscriptionArr" [value]="objSub">{{objSub}}</option>
+		 </select>
+		 <div class="min-height-div">
+		</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="country">Password</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="password" name="password" placeholder="Enter your Password" formControlName="password">
+		<div class="min-height-div">
+			<span *ngIf="!UserForm.controls['password'].valid && UserForm.controls['password'].touched">Please Enter Valid Password(Password must be 8 character long with at least one character and one special character).</span>
+		</div>
+      </div>
+    </div>
+    
+    <div>
+      <input type="submit" value="Submit">
+	  <input type="button" value="Reset" class="resetButton" (click)="resetForm()">
+	  
+    </div>
+  </form>
+</div>
