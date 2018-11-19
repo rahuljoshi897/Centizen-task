@@ -49,6 +49,7 @@ EmailValidator(regEmail: RegExp): ValidatorFn {
 		
 		if(!this.UserForm.valid){
 			this.SuccessMessage = '';
+			this.ErrorMessage = '';
 			this.validateAllFormFields(this.UserForm);
 			return false;
 		}
