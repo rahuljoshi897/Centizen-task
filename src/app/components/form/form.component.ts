@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,NavigationEnd, Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup,Validators,ValidatorFn,AbstractControl,FormControl }   from '@angular/forms';
+import { UserDataService } from "../../services/user-data.service";
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -13,7 +15,7 @@ export class FormComponent implements OnInit {
 	SuccessMessage = '';
 	ErrorMessage = '';
 	
-  constructor(private route:ActivatedRoute,private route1:Router,private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private route : Router, private dataService: UserDataService) {
 	 this.subscriptionArr = ['Basic','Advanced','Pro']; 
 	 //console.log(this.subscriptionArr,'vvv');
 	let regGroup = {
@@ -70,6 +72,9 @@ EmailValidator(regEmail: RegExp): ValidatorFn {
 		localStorage.setItem('userData', JSON.stringify(TempArr));
 		this.UserForm.reset();
 		this.UserForm.controls['subscription'].setValue('Advanced');
+		 this.dataService.sendData(JSON.stringify(TempArr));
+		 this.route.navigate(['/user_data']);
+		
 		this.SuccessMessage = 'Data has been saved  successfully';
 	}
 	validateAllFormFields(formGroup: FormGroup){
